@@ -43,7 +43,7 @@ $$P\&L_{hedge} = \begin{cases} 1000 * (K - S_0) - 1000 * P_0 = -2000 - 5000 = -\
 
 I.e, the put option is only exercised when the share price is below the strike price and when it is exercised it limits the otherwise unlimited potential loss. The second expression gives the break-even point as:
 $$1000 * (S_T- 200)-1000 * 5 = 0 \implies S_T = \frac{5000}{1000} + 200 = \$205$$
-Thus, the hedge limits the loss to $-\$7000$. A loss is obtained for share prices below $\$205$
+Thus, the hedge limits the loss to $\$7000$. A loss is obtained for share prices below $\$205$
 
 
 \section{TV loan}
@@ -52,7 +52,7 @@ $$P = 0.9 * 4000 = 3600, i = 12\% / 12 = 1\%, N = 12$$
 
 The first payment is obtained with the formula: 
 $$A = \frac{P*i}{1-(1+i)^{-N}} = \frac{3600 * 0.01}{1-(1.01)^{-12}} = 319.86$$
-The composition of the payments was calculated with excel using the \textbf{PPMT}-formula and resulted in:
+The composition of the payments was calculated with Excel using the \textbf{PPMT}-formula and resulted in:
 
 \begin{table}[H]
 	\begin{center}
@@ -71,8 +71,8 @@ The composition of the payments was calculated with excel using the \textbf{PPMT
 \section{Bonds I}
 
 $$ y=0.03, r_c = 0.02, F=\$100$$
-Each coupon equals $\frac{r_c * 100}{2} = \$1$. The price $P$ is calculated as:
-$$P = c_{0.5} * e^{-0.5y} + c_{1} * e^{-y} + (F+c_{1.5}) * e^{-1.5y} = e^{-0.5*0.03} + e^{-0.03} + 101 * e^{-1.5*0.03} = \$98.511303$$
+Each coupon equals $c = \frac{r_c * 100}{2} = \$1$. The price $P$ is calculated as:
+$$P = c * e^{-0.5y} + c * e^{-y} + (F+c) * e^{-1.5y} = e^{-0.5*0.03} + e^{-0.03} + 101 * e^{-1.5*0.03} = \$98.511303$$
 
 The zero rates are calculated as:
 \begin{align*}
@@ -110,7 +110,7 @@ The convexity is given by:
 	&= 0.5^2 * \frac{1.5e^{-0.5y}}{100} + 1*\frac{1.5e^{-y}}{100} + 1.5^2 * \frac{1.5e^{-1.5y}}{100} + 2^2 * \frac{101.5e^{-2y}}{100} \approx 3.875798
 \end{align*}
 
-To approximate the price change of the bond for an increase in the yield by 100 basis points one uses the Duration and Convexity in the following way, using a Taylor-approximation:
+To approximate the price change of the bond for an increase in the yield by 100 basis points one uses the Duration and Convexity in the following way, through a Taylor-approximation:
 $$\Delta P = \frac{\partial P}{\partial y} \Delta y + 0.5 \frac{\partial^2 P}{\partial y^2} \Delta y^2 = -DP\Delta y + 0.5 CP \Delta y^2 = -0.01DP + 0.00005CP \approx -1.936721$$
 
 The new price is therefore: $P_{new} = P_{old} + \Delta P = 100 -1.936721 = \$98.063279 $
