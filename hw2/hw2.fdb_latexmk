@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1581558999 "/home/julius/gitrepos/IE420/hw2/hw2.tex" "/home/julius/gitrepos/IE420/hw2/hw2.pdf" "hw2" 1581558999
+["pdflatex"] 1581565785 "/home/julius/gitrepos/IE420/hw2/hw2.tex" "/home/julius/gitrepos/IE420/hw2/hw2.pdf" "hw2" 1581565785
   "/etc/texmf/web2c/texmf.cnf" 1580842676 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/julius/gitrepos/IE420/hw2/hw2.aux" 1581558999 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/home/julius/gitrepos/IE420/hw2/hw2.tex" 1581558998 4576 db2c382373a627180e71420697418251 ""
+  "/home/julius/gitrepos/IE420/hw2/hw2.aux" 1581565785 482 b8da7705b5fb6ba5edbb543994d0bdd2 ""
+  "/home/julius/gitrepos/IE420/hw2/hw2.tex" 1581565784 4974 ddb7579ab7824c63ff448083ca25d6cf ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -136,11 +136,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1562720991 35073 2a40cfca74fcd5e2568b569ccaadf3f1 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1580842863 4208040 9133b60d6de95a7bdc3270dc7096f570 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1580842681 797298 7086523dea5d454deb77154dffa24b07 ""
-  "hw2.aux" 1581558999 8 a94a2480d3289e625eea47cd1b285758 "pdflatex"
-  "hw2.tex" 1581558998 4576 db2c382373a627180e71420697418251 ""
+  "hw2.aux" 1581565785 482 b8da7705b5fb6ba5edbb543994d0bdd2 "pdflatex"
+  "hw2.tex" 1581565784 4974 ddb7579ab7824c63ff448083ca25d6cf ""
   (generated)
-  "hw2.aux"
-  "hw2.log"
   "/home/julius/gitrepos/IE420/hw2/hw2.pdf"
   "/home/julius/gitrepos/IE420/hw2/hw2.log"
+  "hw2.aux"
   "hw2.pdf"
+  "hw2.log"

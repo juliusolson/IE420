@@ -27,31 +27,32 @@
 \thispagestyle{fancy}
 
 
-\section*{Forward Hedge}
+\section{Forward Hedge}
 
 $$ P_0 = \$5, \  K = \$5.15, \ S_T = \$ 4.85$$
-$$Payoff_{long} = S_T - K = \$4.85 - \$5.15 = -\$0.30 \text{ per gallon} $$
-The reason for doing so is eliminating uncertainty in costs. 
-\section*{Put Hedge}
+$${Payoff}_{long} = S_T - K = \$4.85 - \$5.15 = -\$0.30 \text{ per gallon} $$
+The reason for doing so is eliminating uncertainty in costs. When the cost structure for a given term is certain, the company can focus their energy on conducting their core business instead. Furthermore, the risk of unforeseen events increasing the fuel price drastically is circumvented by employing the hedge. 
+
+\section{Put Hedge}
 \begin{align*}
 	&S_0 = \$200, \ N_{stocks} = 1000 \\
 	&K = \$198, \ P_0 = \$5, \ N_{put} = 1000
 \end{align*}
 $$P\&L_{put} = (K-S_T)^+ - P_0, \ \ P\&L_{stock} = (S_T - S_0)$$
-$$P\&L_{hedge} = \begin{cases} 1000 * (K - S_0) - 1000 * P_0 = -2000 - 5000 = -\$7000, \text{ if $S_T \leq 198$ } \\ 1000*(S_T - S_0) - 1000*P_0  \text{, else} \end{cases} $$
+$$P\&L_{hedge} = \begin{cases} 1000 * (K - S_0) - 1000 * P_0 = -2000 - 5000 = -\$7000, \ \ \ \text{ if $S_T < 198$ } \\ 1000*(S_T - S_0) - 1000*P_0, \ \ \ \   \text{ else} \end{cases} $$
 
-I.e, the put option is only exercised when the share price is below the strike price. The second expression gives the break-even point as:
+I.e, the put option is only exercised when the share price is below the strike price and when it is exercised it limits the otherwise unlimited potential loss. The second expression gives the break-even point as:
 $$1000 * (S_T- 200)-1000 * 5 = 0 \implies S_T = \frac{5000}{1000} + 200 = \$205$$
 Thus, the hedge limits the loss to $-\$7000$. A loss is obtained for share prices below $\$205$
 
 
-\section*{TV loan}
+\section{TV loan}
 
 $$P = 0.9 * 4000 = 3600, i = 12\% / 12 = 1\%, N = 12$$
 
 The first payment is obtained with the formula: 
 $$A = \frac{P*i}{1-(1+i)^{-N}} = \frac{3600 * 0.01}{1-(1.01)^{-12}} = 319.86$$
-The composition of the payments was calculated with excel and resulted in:
+The composition of the payments was calculated with excel using the \textbf{PPMT}-formula and resulted in:
 
 \begin{table}[H]
 	\begin{center}
@@ -67,7 +68,7 @@ The composition of the payments was calculated with excel and resulted in:
 \end{center}
 \end{table}
 
-\section*{Bonds I}
+\section{Bonds I}
 
 $$ y=0.03, r_c = 0.02, F=\$100$$
 Each coupon equals $\frac{r_c * 100}{2} = \$1$. The price $P$ is calculated as:
@@ -86,7 +87,7 @@ For coupon rate = 2.4\%, each coupon is equal to $\frac{0.024 * 100}{2} = \$1.2$
 $$P^* = 1.2 * e^{-0.5*r_{0.5}} + 1.2 * e^{-r_1} + 101.2 * e^{-1.5*r_{1.5}} \approx \$114.370856 $$
 
 
-\section*{Bonds II}
+\section{Bonds II}
 
 $$r_c = 3\%, \ P = \$100, \ c = 0.03 * \frac{100}{2} = \$1.5$$
 
@@ -99,7 +100,7 @@ The last expression can be solved using the Solver in Excel, and the result is: 
 
 Next, the duration is calculated using the formula:
 \begin{align*}
-	D &= \sum_{i=1}^n t_i \left(frac{c_ie^{-yt_i}}{P}\right) \\
+	D &= \sum_{i=1}^n t_i \left(\frac{c_ie^{-yt_i}}{P}\right) \\
 	&= 0.5 * \frac{1.5e^{-0.5y}}{100} + 1*\frac{1.5e^{-y}}{100} + 1.5 * \frac{1.5e^{-1.5y}}{100} + 2 * \frac{101.5e^{-2y}}{100} \approx 1.956100
 \end{align*}
 The convexity is given by:
@@ -109,8 +110,7 @@ The convexity is given by:
 	&= 0.5^2 * \frac{1.5e^{-0.5y}}{100} + 1*\frac{1.5e^{-y}}{100} + 1.5^2 * \frac{1.5e^{-1.5y}}{100} + 2^2 * \frac{101.5e^{-2y}}{100} \approx 3.875798
 \end{align*}
 
-To approximate the price change of the bond for an increase in the yield by 100 basis points one uses the Duration and Convexity in the following way:
-
+To approximate the price change of the bond for an increase in the yield by 100 basis points one uses the Duration and Convexity in the following way, using a Taylor-approximation:
 $$\Delta P = \frac{\partial P}{\partial y} \Delta y + 0.5 \frac{\partial^2 P}{\partial y^2} \Delta y^2 = -DP\Delta y + 0.5 CP \Delta y^2 = -0.01DP + 0.00005CP \approx -1.936721$$
 
 The new price is therefore: $P_{new} = P_{old} + \Delta P = 100 -1.936721 = \$98.063279 $
