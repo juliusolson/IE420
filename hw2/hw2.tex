@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[parfill]{parskip}
+
+\parskip = \baselineskip
+
+\pagestyle{fancy}
+\lhead{IE 420 HW1 \ \ \ \ \ Name: Karl Oskar Julius Olson}
+\rhead{Score: \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{IE420 - Homework 1}
+\author{Karl Oskar Julius Olson}
+\date{January 2020}
+
+\begin{document}
+
+\thispagestyle{fancy}
+
+
+\section*{Forward Hedge}
+
+$$ P_0 = \$5, \  K = \$5.15, \ S_T = \$ 4.85$$
+$$Payoff_{long} = S_T - K = \$4.85 - \$5.15 = -\$0.30 \text{ per gallon} $$
+The reason for doing so is eliminating uncertainty in costs. 
+\section*{Put Hedge}
+\begin{align*}
+	&S_0 = \$200, \ N_{stocks} = 1000 \\
+	&K = \$198, \ P_0 = \$5, \ N_{put} = 1000
+\end{align*}
+$$P\&L_{put} = (K-S_T)^+ - P_0, \ \ P\&L_{stock} = (S_T - S_0)$$
+$$P\&L_{hedge} = \begin{cases} 1000 * (K - S_0) - 1000 * P_0 = -2000 - 5000 = -\$7000, \text{ if $S_T \leq 198$ } \\ 1000*(S_T - S_0) - 1000*P_0  \text{, else} \end{cases} $$
+
+I.e, the put option is only exercised when the share price is below the strike price. The second expression gives the break-even point as:
+$$1000 * (S_T- 200)-1000 * 5 = 0 \implies S_T = \frac{5000}{1000} + 200 = \$205$$
+Thus, the hedge limits the loss to $-\$7000$. A loss is obtained for share prices below $\$205$
+
+
+\section*{TV loan}
+
+$$P = 0.9 * 4000 = 3600, i = 12\% / 12 = 1\%, N = 12$$
+
+The first payment is obtained with the formula: 
+$$A = \frac{P*i}{1-(1+i)^{-N}} = \frac{3600 * 0.01}{1-(1.01)^{-12}} = 319.86$$
+The composition of the payments was calculated with excel and resulted in:
+
+\begin{table}[H]
+	\begin{center}
+	\resizebox{\textwidth}{!}{\begin{tabular}{ || c | c | c | c | c | c | c | c | c | c | c | c | c ||}
+		\hline
+		& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+		\hline
+		\textbf{Principal} &  283.86 & 286.69 & 289.56 & 292.46 & 295.38 & 298.34 & 301.32 & 304.33 & 307.37 & 310.45 & 313.55 & 316.69 \\
+		\hline
+		\textbf{Interest} & 36.00 & 33.16 & 30.29 & 27.40 & 24.47 & 21.52 & 18.54 & 15.52 & 12.48 & 9.41 & 6.30 & 3.17\\
+		\hline
+	\end{tabular}}
+\end{center}
+\end{table}
+
+\section*{Bonds I}
+
+$$ y=0.03, r_c = 0.02, F=\$100$$
+Each coupon equals $\frac{r_c * 100}{2} = \$1$. The price $P$ is calculated as:
+$$P = c_{0.5} * e^{-0.5y} + c_{1} * e^{-y} + (F+c_{1.5}) * e^{-1.5y} = e^{-0.5*0.03} + e^{-0.03} + 101 * e^{-1.5*0.03} = \$98.511303$$
+
+The zero rates are calculated as:
+\begin{align*}
+	r_{0.5} &: \$99 = \$100*e^{-0.5*r_{0.5}} \implies r_{0.5} = \frac{\log\left(99/100\right)}{-0.5} \approx 2.010067\%\\
+	r_{1} &: \$97.5 = \$100*e^{r_{1}} \implies r_{1} = \log\left(97.5/100\right) \approx 2.531781 \% \\
+	r_{1.5} &: \$98.511303 = e^{-0.5 * r_{0.5}} + e^{-r_1} + 101*e^{-1.5*r_{1.5}} \\
+	& \implies r_{1.5} = \frac{ \log\left( 96.546303 / 101 \right)}{-1.5} = 3.006520 \%
+\end{align*}
+
+For coupon rate = 2.4\%, each coupon is equal to $\frac{0.024 * 100}{2} = \$1.2$. The price ($P^*$) is given by:
+
+$$P^* = 1.2 * e^{-0.5*r_{0.5}} + 1.2 * e^{-r_1} + 101.2 * e^{-1.5*r_{1.5}} \approx \$114.370856 $$
+
+
+\section*{Bonds II}
+
+$$r_c = 3\%, \ P = \$100, \ c = 0.03 * \frac{100}{2} = \$1.5$$
+
+Yield is calculated with the following formula:
+
+$$P = c * e^{-0.5y} + c*e^{-y} + c*e^{-1.5y} + (F+c)*e^{-2y}$$
+$$100 = 1.5 * e^{-0.5y} + 1.5*e^{-y} + 1.5e^{-1.5y} + 101.5e^{-2y}$$
+
+The last expression can be solved using the Solver in Excel, and the result is: $y \approx 2.977722 \%$.
+
+Next, the duration is calculated using the formula:
+\begin{align*}
+	D &= \sum_{i=1}^n t_i \left(frac{c_ie^{-yt_i}}{P}\right) \\
+	&= 0.5 * \frac{1.5e^{-0.5y}}{100} + 1*\frac{1.5e^{-y}}{100} + 1.5 * \frac{1.5e^{-1.5y}}{100} + 2 * \frac{101.5e^{-2y}}{100} \approx 1.956100
+\end{align*}
+The convexity is given by:
+
+\begin{align*}
+	C &= \sum_{i=1}^n t_i^2 \left(\frac{c_ie^{-yt_i}}{P}\right) \\
+	&= 0.5^2 * \frac{1.5e^{-0.5y}}{100} + 1*\frac{1.5e^{-y}}{100} + 1.5^2 * \frac{1.5e^{-1.5y}}{100} + 2^2 * \frac{101.5e^{-2y}}{100} \approx 3.875798
+\end{align*}
+
+To approximate the price change of the bond for an increase in the yield by 100 basis points one uses the Duration and Convexity in the following way:
+
+$$\Delta P = \frac{\partial P}{\partial y} \Delta y + 0.5 \frac{\partial^2 P}{\partial y^2} \Delta y^2 = -DP\Delta y + 0.5 CP \Delta y^2 = -0.01DP + 0.00005CP \approx -1.936721$$
+
+The new price is therefore: $P_{new} = P_{old} + \Delta P = 100 -1.936721 = \$98.063279 $
+
+\end{document}
+
+
