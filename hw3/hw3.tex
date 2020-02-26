@@ -31,32 +31,31 @@ $$D_0 = c*e^{-r * 1/12} + c*e^{-r * 4/12} \approx 1.0166 $$
 $$F_0 = (180 - 1.0166)e^{0.016 * 6/12} \approx 180.4210022$$
 
 After 2 month: $S_t = \$160, t=2, K=F_0$
-$$D_t = c * e^{-r * 2/12} = 0.5086$$
-$$F_t = e^{r(T-t)}(S_t - D_t) = e^{0.016 * 4/12}(160-0.5086) = 158.643002$$
+$$D_t = c * e^{-r * 2/12} = 0.508642$$
+$$F_t = e^{r(T-t)}(S_t - D_t) = e^{0.016 * 4/12}(160-0.508642) = 160.344251$$
 The value at time t, is given by,
-$$V_t = e^{-r(T-t)}(F_t - K) = e^{-0.016 * 4/12}(158.643002-180.4210022) = -21.662160$$
+$$V_t = e^{-r(T-t)}(F_t - K) = e^{-0.016 * 4/12}(160.344251-180.4210022) = -\$19.969960$$
 
 \section{GBP Forward I}
 
 $$S_0 = 1.3, T=6, r = 1.6\%, q = 1.0\%$$
 
-For zero-value, forward price should be: $F_0 = S_0*e^{(r-q)T} = 1.3 * e^{(0.016-0.01)/2} \approx \$1.30391 $. As the qouted price is lower than this, an arbitrage opportunity exists for a long forward contract.
+For zero-value the forward price should be: $F_0 = S_0*e^{(r-q)T} = 1.3 * e^{(0.016-0.01)/2} \approx \$1.30391 $. As the quoted price is lower than this, an arbitrage opportunity exists for a long forward contract.
 
 At time = 0: 
 \begin{itemize}
 	\item Long forward to buy 1 M GBP in 6 months
-	\item Loan $e^{-qT}$ M GBP and sell to receive $S_0*e^{-qT}$ M USD.
+	\item Loan $e^{-qT}$ Million GBP and sell to receive $S_0*e^{-qT}$ Million USD.
 	\item Deposit the dollars for 6 months with interest rate $r$.
 \end{itemize}
 
 At time = T: 
 \begin{itemize}
-	\item Withdraw $S_0 * e^{(r-q)T}$ M USD.
-	\item Buy 1 M GBP for forward price $\$1.30151$ million and pay back loan
+	\item Withdraw $S_0 * e^{(r-q)T}$ Million USD.
+	\item Buy 1 Million GBP for forward price $\$1.30151/GBP$ and pay back loan
 \end{itemize}
-At, the end this amounts to the amount withdrawn from the account subtracted by the cost to pay back the loan:
+At the profit equals the amount withdrawn from the account subtracted by the cost to pay back the loan:
 $$ S_0 * e^{(r-q)T} MUSD - 1.30151 MUSD \approx \$2395.855854$$
-
 
 \section{LIBOR FRA}
 $$r_1 = 1.6\%, \ r_2 = 2\%, \ t_1 = 6, \ t_2 = 18, \ L = \$1,000000$$
@@ -75,13 +74,13 @@ $$S_0 = \$1.3/GPB, \ r_b = \%1.7, \ r_d = \%1.5, \ y=\%1$$
 % If the forward price is lower than zero-cost a opportunity to long the contract exists. This is carried out by borrowing $e^{-qT}$ M GBP at $\%1$, exchanging them for $S_0e^{-qT}$ M USD and then depositing them with rate $r_deposit$. At maturity, the loan is paid back for 
 There are two arbitrage opportunities: If the price is low enough the arbitrager can long the forward and if the price is too high the arbitrager can short the forward.
 \begin{itemize}
-	\item Profit - long arbitrage: $S_0e^{r_{d}-q}T - F_0= 1.3e^{0.005/12} - F_0$
-	\item Profit - short arbitrage: $F_0 - S_0e^{r_{b}-q}T = F_0 - 1.3e^{0.007/12}$
+	\item Long arbitrage profit: $S_0e^{r_{d}-q}T - F_0= 1.3e^{0.005} - F_0$
+	\item Short arbitrage profit: $F_0 - S_0e^{r_{b}-q}T = F_0 - 1.3e^{0.007}$
 \end{itemize}
 
-To elimiate both opportunities, the following must hold: 
-$$\begin{cases} F_0 > 1.3e^{0.005/12} \\ F_0 < 1.3e^{0.007/12} \end{cases}$$
-This gives the answer as: $1.300542 \leq F_0 \geq 1.300759$
+To eliminate both opportunities, the following must hold: 
+$$\begin{cases} F_0 \geq 1.3e^{0.005} \\ F_0 \leq 1.3e^{0.007} \end{cases}$$
+This gives the answer as: $1.306516 \leq F_0 \geq 1.309132$
 
 
 \section{Put Arbitrage}
@@ -91,7 +90,7 @@ An arbitrage strategy for this situation would be to short the put option with t
 \textit{At time 0}: Short 315-puts and receive $\$5.60 / option$. Buy equally many 317.5-puts for $\$5.40/option$.
 The payoff for a short put: $-(K-S)^+$, and for a long put: $(K-S)^+$. For this setup the combined P\&L thus amounts to:
 $$(K_2-S)^+ -(K_1-S)^+ + (P_1 - P_2) = (317.5-S)^+ - (315-S)^+ + 0.2$$
-Considering the stock price $S$ when exercising the option, there are three possibilites.
+Considering the stock price $S$ when exercising the option, there are three possibilities.
 \begin{enumerate}
 	\item $S > \$317.5$. This means that none of the options are exercised and the P\&L becomes: \\ $P\&L = \$0.2$
 	\item $\$315 < S < \$317.5$. In this situation, only the 317.5-put is exercised: \\ $P\&L = 317.5 - S + 0.2 > \$0.2$
