@@ -58,12 +58,12 @@ At this time, the profit equals the amount withdrawn from the account subtracted
 $$ S_0 * e^{(r-q)T} MUSD - 1.30151 MUSD \approx \$2395.855854$$
 
 \section{LIBOR FRA}
-$$r_1 = 1.6\%, \ r_2 = 2\%, \ t_1 = 6, \ t_2 = 18, \ L = \$1,000000$$
+$$r_1 = 1.6\%, \ r_2 = 2\%, \ t_1 = 6, \ t_2 = 18, \ L = \$1,000,000$$
 
 The interest rate to ensure a zero-cost FRA is given by:
 $$r_K = \frac{r_2t_2 - r_1t_1}{t_2-t_1} = \frac{0.02 * 18/12 - 0.016*6/12}{(18-6)/12} = 2.2\%$$
 
-In 6 months: $r_M = 2.4\%, \ r=2.0\%$
+After 6 months: $r_M = 2.4\%, \ r=2.0\%$
 
 The value for the borrower at time $t_2$ is calculated as: $ V(t_2) = L\left( e^{r_M(t_2-t_1)} - e^{r_K(t_2-t_1)} \right)$. To get the value of the FRA for the borrower at the time of settlement ($t_1$), this has to be discounted by the risk free interest rate:
 $$V(t_1) = e^{-r(t_2-t_1)}V(t_2) = Le^{-r(t_2-t_1)}\left( e^{r_M(t_2-t_1)} - e^{r_K(t_2-t_1)} \right) = $$
@@ -74,8 +74,8 @@ $$S_0 = \$1.3/GPB, \ r_b = 1.7\%, \ r_d = 1.5\%, \ q=1\%$$
 % If the forward price is lower than zero-cost a opportunity to long the contract exists. This is carried out by borrowing $e^{-qT}$ M GBP at $\%1$, exchanging them for $S_0e^{-qT}$ M USD and then depositing them with rate $r_deposit$. At maturity, the loan is paid back for 
 There are two arbitrage opportunities: If the price is low enough the arbitrager can long the forward and if the price is too high the arbitrager can short the forward.
 \begin{itemize}
-	\item Long arbitrage profit: $S_0e^{r_{d}-q}T - F_0= 1.3e^{0.005} - F_0$
-	\item Short arbitrage profit: $F_0 - S_0e^{r_{b}-q}T = F_0 - 1.3e^{0.007}$
+	\item Long arbitrage profit: $S_0e^{(r_d-q)T} - F_0= 1.3e^{0.005} - F_0$
+	\item Short arbitrage profit: $F_0 - S_0e^{(r_b-q)T} = F_0 - 1.3e^{0.007}$
 \end{itemize}
 
 To eliminate both opportunities, the following must hold: 
@@ -85,7 +85,7 @@ This gives the answer as: $1.306516 \leq F_0 \leq 1.309132$
 
 \section{Put Arbitrage}
 $$K_1 = \$315, \ P_1 = \$5.60 \ K_2 = \$317.5, \ P_2 = \$5.40$$
-An arbitrage strategy for this situation would be to short the put option with the lower strike price, and buy the put option with the higher strike price. 
+An arbitrage strategy for this situation would be to short the put option with the lower strike price, and buy the put option with the higher strike price.
 
 \textit{At time 0}: Short 315-puts and receive $\$5.60 / option$. Buy equally many 317.5-puts for $\$5.40/option$.
 The payoff for a short put: $-(K-S)^+$, and for a long put: $(K-S)^+$. For this setup the combined P\&L thus amounts to:
@@ -96,7 +96,7 @@ Considering the stock price $S$ when exercising the option, there are three poss
 	\item $\$315 < S < \$317.5$. In this situation, only the 317.5-put is exercised: \\ $P\&L = 317.5 - S + 0.2 > \$0.2$
 	\item $S < \$315$. Finally, this case means that both options are exercised: \\$P\$L = 317.5 - S - 315 + S + 0.2 = \$2.7$
 \end{enumerate}
-Thus, no matter the share price $S$ the strategy implies a profit of at least $\$0.2/option$
+Thus, no matter the share price $S$ the strategy implies a profit of at least $\$0.2/option$ and is thus an example of arbitrage.
 
 \end{document}
 
