@@ -2,7 +2,7 @@ from math import exp
 
 S0 = 100
 d = 0.8
-u = 1.2
+u = 1.1
 r = 0.01
 T = 3/12
 K = 95

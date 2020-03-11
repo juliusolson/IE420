@@ -25,7 +25,7 @@
 \section{Put Pricing}
 
 $$S_0 = \$90, \ c = \$5.2, \ K = S_0, \ r = 0.9\%, \ T = 2/12 $$
-$$D_0 = c_1 * e^{r * t_1} = 1.1 * e^{0.009 * 1/12} \approx \$1.099175 $$
+$$D_0 = c_1 * e^{-r * t_1} = 1.1 * e^{-0.009 * 1/12} \approx \$1.099175 $$
 
 The price is determined using the put-call parity, for discrete income assets: 
 $$ c + e^{-rT}K = p + S_0 - D_0 \implies p = c + e^{-rT}K - (S_0 - D_0)$$
@@ -74,9 +74,9 @@ $$f_0 = S_0\Delta - \Psi = 20*-18 - (-429.845391) \approx \$69.845391 $$
 $$u = 1.1, \ d = 0.8, \ T=\delta=3/12, \ r = 1\%, \ K = \$95$$
 $$f_u = max(K - uS_0, 0) = 0, \ f_d = max(K - u * dS_0, 0) = 15$$
 For the risk neutral pricing, we first need the risk neutral probability $p^*$.
-$$p^* = \frac{e^{r\delta} - d}{u - d} = \frac{e^{0.01 * 3/12}-0.8}{1.1-0.8} \approx 0.506258$$
+$$p^* = \frac{e^{r\delta} - d}{u - d} = \frac{e^{0.01 * 3/12}-0.8}{1.1-0.8} \approx 0.675010$$
 The risk neutral price is then given as the risk neutral expectation of the payoff discounted at the risk free rate:
-$$f_0 = e^{-r\delta}\mathbb{E}[f(S_{\delta})] = e^{-r\delta}\left(p^*f_u + (1-p^*)f_d\right) = e^{-0.01*3/12}\left((1-0.506258)*15\right) = \$7.387641$$
+$$f_0 = e^{-r\delta}\mathbb{E}[f(S_{\delta})] = e^{-r\delta}\left(p^*f_u + (1-p^*)f_d\right) = e^{-0.01*3/12}\left((1-0.675010)*15\right) = \$4.862672$$
 
 
 \end{document}
