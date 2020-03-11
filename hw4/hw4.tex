@@ -78,6 +78,9 @@ $$p^* = \frac{e^{r\delta} - d}{u - d} = \frac{e^{0.01 * 3/12}-0.8}{1.1-0.8} \app
 The risk neutral price is then given as the risk neutral expectation of the payoff discounted at the risk free rate:
 $$f_0 = e^{-r\delta}\mathbb{E}[f(S_{\delta})] = e^{-r\delta}\left(p^*f_u + (1-p^*)f_d\right) = e^{-0.01*3/12}\left((1-0.675010)*15\right) = \$4.862672$$
 
+A delta hedge is constructed by purchasing $\Delta$ shares according to:
+$$\Delta = \frac{f_u-f_d}{S_0(u-d)} = 100 * \frac{0 - 15}{100 * (1.1 - 0.8)} = -50$$
+As such, you should (short) sell 50 shares to construct a delta hedge.
 
 \end{document}
 

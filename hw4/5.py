@@ -17,3 +17,6 @@ fd = max(K - d * S0, 0)
 f0 = exp(-r * T) * (p_star * fu + (1-p_star) * fd)
 
 print(f"Risk free price: {f0}")
+
+Delta = (fu - fd) / (S0 * (u-d))
+print(f"Delta: {Delta}")
