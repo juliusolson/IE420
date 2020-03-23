@@ -1,0 +1,229 @@
+\documentclass{article}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[parfill]{parskip}
+
+\parskip = \baselineskip
+
+\pagestyle{fancy}
+\lhead{IE 420 HW4 \ \ \ \ \ Exam Notes - Julius Olson}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+\thispagestyle{fancy}
+
+
+Home work solutions: \href{https://github.com/juliusolson/IE420/blob/master/hw1/hw1.pdf}{HW1} \href{https://github.com/juliusolson/IE420/blob/master/hw2/hw2.pdf}{HW2} \href{https://github.com/juliusolson/IE420/blob/master/hw3/hw3.pdf}{HW3} \href{https://github.com/juliusolson/IE420/blob/master/hw4/hw4.pdf}{HW4}.
+
+
+\section*{Lecture 1 - Intro}
+
+\subsection*{Put Option}
+
+Option to sell a share at strike price $K$, at maturity $T$. (Also before maturity if american option).
+$$Payoff = (K-S)^+, \ P\&L = (K-S)^+ - p$$
+
+\subsection*{Call option}
+
+Option to buy a share at strike price $K$, at maturity $T$. (Also before if american).
+$$ Payoff = (S-K)^+ \ P\&L = (S-K)^+ - c $$
+
+\subsection*{Forward Contract}
+Agree to buy or sell an asset at time $T$ for price $K$. The price of the forward is that which makes the contract value equal zero. 
+
+\begin{itemize}
+	\item \textit{Long} - buy forward. Payoff: $S-K$ 
+	\item \textit{Short} - Sell forward. Payoff: $K-S$
+\end{itemize}
+
+\section*{Lecture 2 - Bonds}
+
+\subsection*{Time Value of Money and Rents}
+\begin{itemize}
+	\item Rate of return: $\frac{B - A}{A}$
+	\item Compound interest: $(1 + r)^t$ for annual compounding, $e^{rt}$ for continuous.
+	\item Repo: Rate implied by financial institution selling and buying back securities. 
+	\item Basis point: $0.01\%$
+	\item Discount Factor: $e^{-rt}$ 
+\end{itemize}
+
+\subsection*{Annuity}
+
+Series of payments made at equal intervals. $A$ - payment amount, $N$ - number of payments.
+
+\begin{itemize}
+	\item Future value: $F$
+	\item Present Value: $P$
+	\item rate/period: $i$
+	\item $P = \frac{A}{i}\left(1 - (1+i)^{-N}\right)$
+	\item $F = \frac{A}{i}\left((1+i)^N - 1\right)$
+	\item $A = \frac{P * i}{1 - (1+i)^{-N}}$
+\end{itemize}
+
+\subsection*{Zero Coupon Bonds}
+
+Sold at price lower than face value, and pays no coupons. Return derived from price difference. \textbf{Zero rate}(spot rate) is the interest rate implied by a zero-coupon bond. 
+
+$$P = e^{-rT}F, \ r = \frac{1}{T}ln(F/P)$$
+
+
+\subsection*{Coupon Bonds}
+
+\textbf{Bootstrap methods} - Discount coupons and finally face value to figure out equivalent zero rates. 
+
+\textbf{Bond Yield}  - Constant interest rate implied by bond so that present value of future payments is equal to the current bond price. 
+$$P = c_1e^{-yt_1} + ... + c_ne^{-yt_n} \ \ \text{Find y}$$
+
+\textbf{Duration} - Weighted average of payment times. 
+$$D = \sum_{i=1}^n t_i \left(\frac{c_ie^{-yt_i}}{P}\right), \ P = \sum_{i=1}^n c_ie^{-yt_i}$$
+$$\frac{\partial P}{\partial y} = - \sum_{i=1}^n t_ic_ie^{-yt_i} = -DP, \ \Delta P \approx - DP\Delta y$$
+
+\textbf{Convexity} - Weighted average of squared payment times
+$$C = \sum_{i=1}^n t_i^2 \left(\frac{c_i e^{-yt_i}}{P}\right) \ \ \text{Measures the curvature of the price-yield curve}$$
+$$\Delta P = \frac{\partial P}{\partial y} \Delta y + \frac{1}{2} \frac{\partial^2 P}{\partial y^2} \Delta y^2 = - DP\Delta y + \frac{1}{2} CP\Delta y^2$$
+
+\section*{Lecture 3 - Forward Contract}
+
+\textbf{Forward Price}: Specific delivery price $K$ so that forward contract is of zero cost. The value is determined so that no arbitrage is possible. 
+
+\begin{itemize}
+	\item $t = 0, T$. Inception and maturity
+	\item $S_0, S_T$. Underlying asset prices
+	\item $F_0$: Forward price
+	\item $r$: Risk free interest rate per year. 
+	\item $F_0 = S_0e^{rT}$
+\end{itemize}
+
+\subsection*{Investment with discrete income}
+
+\begin{itemize}
+	\item $c_0, ... c_n$
+	\item Effective cost: $S_0 - D_0$
+	\item $D_0 = c_1 e^{-r_1t_1} + ... + c_ne^{-r_nt_n}$
+	\item $F_0 = (S_0 - D_0)e^{rT}$
+\end{itemize}
+
+\subsection*{Investment with Continuous Yield}
+
+\begin{itemize}
+	\item Underlying asset rate: $q$	
+	\item 1 unit = $e^{qT}$ at time $T$
+	\item Time zero cost: $S_0 e^{-qT}$ (in USD if q for e.g. GBP)
+	\item $F_0 = S_0 e^{-qT}e^{rT} = S_0 e^{(r-q)T}$
+\end{itemize}
+
+\subsection*{Time t Forward Price}
+
+\begin{itemize}
+	\item No income asset: $F_t = e^{r(T-t)}S_t$
+	\item Discrete income: $F_t = e^{r(T-t)}(S_t - D_t)$
+	\item Continuous yield: $F_t = e^{(r-q)(T-t)}S_t$
+	\item At time $t$, value of forward is 0 if $K=F_t$
+	\item $V_t$: Value at time $t$ of long forward with delivery price $K$.
+	\item $V_t = e^{-r(T-t)}(F_t - K)$
+\end{itemize}
+
+\subsection*{Forward Rate Agreement (FRA)}
+
+\begin{itemize}
+	\item FRA: Agreement to borrow/lend an amount of $L$ at a certain rate $r_K$
+	\item For no arbitrage: $r_K = \frac{r_2t_2 - r_1t_1}{t_2 - t_1}$
+	\item Value of RFA (after revealed market rate $r_M$): $V(t_2) = L\left(e^{r_M(t_2-t_1)} - e^{r_K(t_2-t_1)}\right)$
+	\item At time $t_1$, the value is the present value of $V(t_2)$: $V(t_1) = e^{-r(t_2-t_1)}V(t_2)$
+	\item Lender pays borrower $V(t_1)$ if $r_M > r_K$ and borrower pays lender $-V(t_1)$ otherwise.
+\end{itemize}
+
+\section*{Lecture 4 - Options}
+
+\subsection*{European and American options}
+
+\begin{itemize}
+	\item American can be exercised any time before or at maturity
+	\item European - only at maturity
+	\item American price $\geq$ European price
+	\item Intrinsic Value: call: $(S-K)^+$, put: $(K-S)^+$
+	\item Time Value = Option Value - Intrinsic Value
+	\item Call price is decreasing function of $K$
+	\item Put price is increasing function of $K$
+\end{itemize}
+
+\subsection*{European put-call Parity}
+$$c + Ke^{-rT} = p + S_0$$
+Both portfolios have same payoff at time $T$, and should therefore have same value at $T=0$.
+
+General case (depending on income type from asset):
+$$c + e^{-rT}K = p + \begin{cases} S_0 \\ S_0 - D_0 \\ S_0e^{-qT} \end{cases}$$
+
+
+\subsection*{Option Price bounds}
+\begin{itemize}
+	\item European Call option price bound: $(S_0 e^{-qT} - Ke^{-rT}) \leq c \leq S_0 e^{-qT}$
+	\item Upper bound from payoff: $(S_T - K)^+ \leq S_T \implies c \leq S_0e^{-qT}$
+	\item Lower bound from parity: $c = p + S_0e^{-qT} - Ke^{-rT} \geq S_0e^{-qT} - Ke^{-rT}$
+	\item European Put option bounds:
+	\item Upper bound: $(K-S_T)^+ \leq K \implies p \leq Ke^{-rT}$
+	\item Lower bound: From parity: $p = c + Ke^{-rT} - S_0e^{-qT} \geq Ke^{-rT} - S_0e^{-qT}$
+\end{itemize}
+
+
+\subsection*{Option Trading Strategies}
+
+\begin{itemize}
+	\item Covered Spread: Sell call, buy asset. Cost: $S-c > 0$, payoff: $S_t - (S_T - K)^+$
+	\item Bull Spread: Buy call with strike $K_1$, sell call with strike $K_2>K_1$. cost: $c_1-c_2 > 0$
+	\item Bear Spread: Buy put with strike $K_2$, sell put with strike $K_1$, cost: $p_2 - p_1 > 0$.
+	\item Box Spread: Bull (call) spread + bear (put) spread
+	\item Butterfly Spreads: Buy calls with strikes $K_1$ and $K_3$ and sell two calls with strike $K_2 \in (K_1, K_3)$, cost: $c_1 + c_3 - 2c_2$.
+	\item Calendar Spread: Sell call (maturity $T$), buy call (maturity $T_1 > T$), cost: $c_1 - c$.
+	\item Straddle: Buy call \& Put with strike $K$, cost: $c + p > 0$
+	\item Strangles: Buy put with strike $K_1$ and call with strike $K_2 > K_1$, cost: $c + p > 0$
+\end{itemize}
+
+\section*{Binomial Model}
+
+\subsection*{One-step binomial model}
+
+Stock price over period $\left[0, \delta \right]$: $S = (S_0, S_{\delta})$. 
+$$S_{\delta} = \begin{cases} uS_0, \ \text{with prob p} \\ dS_0, \ \text{with prob 1-p} \end{cases}$$
+$$p \sim Ber$$
+
+For risk free asset, we have: $t=0: 1, t =  \delta : e^{r\delta}$. Thus to avoid arbitrage: $d < e^{r\delta} < u$. If $d < u \leq e^{r\delta}$, short stock and deposit at rate $r$. If $u > d \geq e^{r\delta}$, borrow at rate $r$ and buy stock. 
+
+
+\subsection*{Replicating Portfolio}
+
+Find a replicating portfolio for the contract (how many shares, and how much to borrow). There is no arbitrage when the value of the portfolio equals the value of the contract. 
+\begin{itemize}
+	\item Derivative Payoff: $f(S_{\delta}): f_u = f(uS_0), f_d = f(dS_0)$
+	\item For calls: $f_u = (uS_0 - K)^+, f_d = (dS_0 - K)^+$
+	\item Replicating portfolio: Buy $\Delta$ shares, and borrow $\Psi$ dollars.
+	\item Value at time $\delta$: $\Delta S_{\delta} - \Psi e^{r\delta}$
+	\item $\Delta * uS_0 - \Psi e^{r\delta} = f_u, \ \Delta * dS_0 - \Psi e^{r\delta} = f_d$
+	\item $\Delta = \frac{f_u - f_d}{S_0 (u-d)}, \ \Psi = \frac{df_u - uf_d}{e^{r\delta}(u-d)}$
+	\item Value of derivative at time 0 should be: $f_0 = \Delta S_0 - \Psi = \frac{f_u - f_d}{u-d} - \frac{df_u-uf_d}{e^{r\delta}(u-d)}$
+\end{itemize}
+
+\subsection*{Risk Neutral Pricing}
+
+$$p^* = \frac{e^{r\delta} - d}{u - d}$$
+$p^*$ is the risk neutral probability. Risk neutral pricing: Derivative price = risk neutral expectation of the payoff discounted at the risk free rate. 
+$$f_0 = e^{-r\delta}\mathbb{E}^*\left[f(S_{\delta})\right] = e^{-r\delta} \left(p^* f_u + (1-p^*)f_d\right)$$
+
+\subsection*{Delta Hedging}
+How to hedge a short position in a derivative contract. Trade the underlying asset and risk free investment. Thus the replicating portfolio contains $\Delta = \frac{f_u - f_d}{S_0 (u-d)}$ shares. Sell the derivative and buy $\Delta$ shares to cancel the risk. 
+
+
+
+\end{document}
+
+
