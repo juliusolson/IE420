@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[parfill]{parskip}
+
+\parskip = \baselineskip
+
+\pagestyle{fancy}
+\lhead{IE 420 HW7  \ \ \ \ \ Name: Karl Oskar Julius Olson}
+\rhead{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+\thispagestyle{fancy}
+
+\section{Future hedging}
+
+$$\beta = 1.2, \ Q_f = 250, \ S_0 = \$500M, \ I_0 = \$2837$$
+
+The number of contracts needed to hedge the systematic risk is given by the following formula:
+$$\frac{\beta S_0}{I_0 Q_f} = 845.964047 \text{ contracts}$$. 
+
+If the manager wants to achieve a beta of $\beta^* = 0.5$ The number of contracts (named $n$ below) is given by:
+$$\beta^* = \beta - n \times \frac{Q_f I_0}{S_0} \implies n = \frac{\beta - \beta^*}{Q_f I_0 / S_0} = 493.479027 \text{contracts}$$
+I.e. the manager should \textbf{short} that many contracts to achieve the desired beta value.
+
+\section{Margins}
+
+$$\text{Inital Margin: } m_0=\$13200, \ \text{Maintenance margin: }m_m = \$12000, \ F_0 = \$2818.50, \ Q_f = 50$$
+
+A margin call is received when the balance on the margin account is less than the maintenance margin. After the first day the future price $F_1$ that enables this to happen is found by the following formula: 
+$$Q_f \times (F_1 - F_0) + m_0 < m_m \implies F_1 < \frac{m_m - m_0}{Q_f} + F_0 = \frac{-1200}{50} + 2818.50 = \$2794.5$$
+When the the futures price tomorrow $F_1 < \$2794.5$ a margin call is thus received.
+
+The percentage change $x$ in the futures price that makes the account balance negative is found by: 
+
+$$Q_f \times (xF_0) + m_0 < 0 \implies (x-1) = \frac{-m_0}{Q_f \times F_0} = -9.366684\%$$
+I.e. if the futures price \textbf{decreases} with more than $9.366684\%$ the account balance will be negative.
+
+
+\section{Brownian Motion}
+
+The drift for the stock is calculated as the average log daily return.
+$$a = \frac{1}{N-1} \times \sum_{i=1}^N \log(S_i / S_{i-1}) = 0.0009695$$
+I.e. the average daily log return of the stock.
+
+The daily volatility is then calculated using the sample variance and the average daily log return $a$: 
+\begin{align*}
+	s^2 &= \frac{1}{N-1} \sum_{i=1}^{N}\left( \log \frac{S_i}{S_{i-1}} - a \right)^2 \\
+	\sigma &= s = 0.0136529
+\end{align*}
+
+The daily average rate of return is then given by the formula:
+$$\mu = a + \frac{1}{2}\sigma^2 = 0.0010627$$
+
+The annualized versions are then calculated as:
+\begin{align*}
+	a_{yearly} &= a * 252 = 0.2443182\\
+	\sigma_{yearly} &= \frac{s}{\sqrt{1/252}} = 0.2167337\\
+	\mu_{yearly} &= a_{yearly} + \frac{1}{2}\sigma_{yearly}^2 = 0.2678050
+\end{align*}
+
+
+\section{Implied Volatility}
+
+$$S_0 = \$162.93, \ r = 0.0083, \ q = 0.0189, \ T=0.154, c_{165} = \$6.75, \ c_{170} = \$4.35$$
+
+The prices are calculated using the Black-Scholes model according to:
+\begin{align*}
+	&c_{BS} = S_0 e^{-qT}N(d_1) - Ke^{-rT}N(d_2) \\
+	&d_1 = \frac{\ln(S_0 / K) + (r + q + 0.5\sigma^2) T}{\sigma \sqrt{T}}
+	&d_2 = d_1 - \sigma \sqrt{T}
+\end{align*}
+
+The implied volatility for the two options was calculated using trial-and-error via a binary search algorithm written in python: 
+
+\begin{lstlisting}[language=Python]
+S0 = 162.93
+r = 0.0083
+q = 0.0189
+T = 0.154
+def find_sigma(low, high, K, price):
+	diff = 1.0
+	while diff > 0.0001:
+		guess = (high + low) / 2
+		bs = black_scholes(S0, K, r, q, T, guess)
+		diff = abs(bs - price)
+		if bs < price:
+			low = guess
+		if bs > price:
+			high = guess
+	return [guess, bs, diff]
+\end{lstlisting}
+
+Where black\_scholes simply is an implementation of the black-scholes algorithm. The implied volatilities were found to be:
+$$ \sigma_{165} = 0.3071, \ \sigma_{170} = 0.286534 $$
+
+By linear interpolation the volatility of the 167.5-call should be: 
+$$\sigma_{167.5} = \frac{\sigma_{170} - \sigma_{165}}{2} = 0.2968$$.
+
+The price is calculated using the black-scholes formula as presented above as: 
+$$c_{167.5} = black\_scholes(S_0, K, r, q, T, \sigma_{167.5}) = 5.4826$$
+
+\section{Put Options}
+$$S_0 = \$1.24, \ r = 0.008, \ q = 0.01, \ K=\$1.24$$
+The vanilla put option is calculated using the standard Black-Scholes algorithm:
+\begin{align*}
+	d_1 &= \frac{\log(S_0 / K) + (r - q + 0.5 \sigma^2)T}{\sigma \sqrt{T}} \\
+	d_2 &= d1 - \sigma \sqrt{T} \\
+    p_{vanilla} &= -S_0 e^{-qT} N(-d_1) + K e^{-rT}N(-d_2) = \$0.035436
+\end{align*}
+
+For the cash-or-nothing put we want to discount the payoff times the probability that the stock price is below the strike price with the risk neutral rate. The payoff in this case is equal to the strike price K. The price is thus given by the second term of the Black-Scholes model as:
+$$p_{cash} = K^{-rt}N(-d_2) = \$ 0.641903$$
+
+For the asset-or-nothing-put, which is also a binary option, we instead receive the value of the underlying asset in the case that the stock price is below the strike price. As a vanilla option is equal to a long position in an asset-or-nothing put and a short in a cash-or-nothing put, the following holds: 
+
+$$p_{vanilla} = p_{cash} - p_{asset} \implies p_{asset} = p_{cash} - p_{vanilla} = S_0e^{-qt} N(-d_1) = \$0.606467$$
+
+
+\end{document}
+

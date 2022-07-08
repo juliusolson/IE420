@@ -72,14 +72,14 @@ $$f_0 = S_0\Delta - \Psi = 20*-18 - (-429.845391) \approx \$69.845391 $$
 
 \section{Binomial II}
 $$u = 1.1, \ d = 0.8, \ T=\delta=3/12, \ r = 1\%, \ K = \$95$$
-$$f_u = max(K - uS_0, 0) = 0, \ f_d = max(K - u * dS_0, 0) = 15$$
+$$f_u = max(K - uS_0, 0) = 0, \ f_d = max(K - dS_0, 0) = 15$$
 For the risk neutral pricing, we first need the risk neutral probability $p^*$.
 $$p^* = \frac{e^{r\delta} - d}{u - d} = \frac{e^{0.01 * 3/12}-0.8}{1.1-0.8} \approx 0.675010$$
 The risk neutral price is then given as the risk neutral expectation of the payoff discounted at the risk free rate:
 $$f_0 = e^{-r\delta}\mathbb{E}[f(S_{\delta})] = e^{-r\delta}\left(p^*f_u + (1-p^*)f_d\right) = e^{-0.01*3/12}\left((1-0.675010)*15\right) = \$4.862672$$
 
 A delta hedge is constructed by purchasing $\Delta$ shares according to:
-$$\Delta = \frac{f_u-f_d}{S_0(u-d)} = 100 * \frac{0 - 15}{100 * (1.1 - 0.8)} = -50$$
+$$\Delta = \text{\# of shares } * \frac{f_u-f_d}{S_0(u-d)} = 100 * \frac{0 - 15}{100 * (1.1 - 0.8)} = -50$$
 As such, you should (short) sell 50 shares to construct a delta hedge.
 
 \end{document}
